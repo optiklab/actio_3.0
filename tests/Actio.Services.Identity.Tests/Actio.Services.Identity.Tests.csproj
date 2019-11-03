@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -13,8 +13,8 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
