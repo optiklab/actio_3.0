@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Actio.Services.Activities.Domain.Models;
 using Actio.Services.Activities.Domain.Repositories;
-using Actio.Services.Activities.Repositories;
 using Actio.Services.Activities.Services;
 using Moq;
 using Xunit;

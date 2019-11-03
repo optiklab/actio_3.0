@@ -1,6 +1,3 @@
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Actio.Common.Auth;
 using Actio.Services.Identity;
 using FluentAssertions;
@@ -8,6 +5,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Actio.Services.Activities.Tests.Integration.Controllers

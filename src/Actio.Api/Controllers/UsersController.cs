@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Actio.Common.Commands;
 using Microsoft.AspNetCore.Mvc;
