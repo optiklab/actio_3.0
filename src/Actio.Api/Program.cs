@@ -1,5 +1,13 @@
-﻿using Actio.Common.Events;
+using Actio.Common.Events;
 using Actio.Common.Services;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Hosting;
+//using Microsoft.Extensions.Configuration;
+//using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Logging;
 
 namespace Actio.Api
 {
@@ -7,6 +15,7 @@ namespace Actio.Api
     {
         public static void Main(string[] args)
         {
+            //CreateHostBuilder(args).Build().Run();
             ServiceHost.Create<Startup>(args)
                 .UseRabbitMq()
                 .SubscribeToEvent<ActivityCreated>() // Subscribe API to events.
@@ -14,14 +23,11 @@ namespace Actio.Api
                 .Run();
         }
 
-        // // Default
-        // public static void Main(string[] args)
-        // {
-        //     CreateWebHostBuilder(args).Build().Run();
-        // }
-
-        // public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        //     WebHost.CreateDefaultBuilder(args)
-        //         .UseStartup<Startup>();
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>();
+        //        });
     }
 }

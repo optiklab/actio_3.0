@@ -1,4 +1,4 @@
-﻿using Actio.Common.Commands;
+using Actio.Common.Commands;
 using Actio.Common.Mongo;
 using Actio.Common.RabbitMq;
 using Actio.Services.Activities.Domain.Repositories;
@@ -7,9 +7,9 @@ using Actio.Services.Activities.Repositories;
 using Actio.Services.Activities.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Actio.Services.Activities
@@ -26,8 +26,10 @@ namespace Actio.Services.Activities
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddControllers();
+			
+			// services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			
             // services.AddLogging();
             var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILogger<string>>();
@@ -50,7 +52,7 @@ namespace Actio.Services.Activities
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -65,8 +67,18 @@ namespace Actio.Services.Activities
             }
 
             app.UseHttpsRedirection();
+
             app.ApplicationServices.GetService<IDatabaseInitializer>().InitializeAsync();
-            app.UseMvc();
+			
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+			//app.UseMvc();
         }
     }
 }

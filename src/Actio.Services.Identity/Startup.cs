@@ -1,4 +1,4 @@
-﻿using Actio.Common.Auth;
+using Actio.Common.Auth;
 using Actio.Common.Commands;
 using Actio.Common.Mongo;
 using Actio.Common.RabbitMq;
@@ -8,9 +8,11 @@ using Actio.Services.Identity.Handlers;
 using Actio.Services.Identity.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.HttpsPolicy;
+//using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Actio.Services.Identity
@@ -27,8 +29,8 @@ namespace Actio.Services.Identity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddControllers();
+			//services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // services.AddLogging();
             var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILogger<string>>();
@@ -52,13 +54,13 @@ namespace Actio.Services.Identity
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+			else
             {
                 //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-2.2
                 app.UseExceptionHandler("/Error");
@@ -67,8 +69,17 @@ namespace Actio.Services.Identity
             }
 
             app.UseHttpsRedirection();
+
             app.ApplicationServices.GetService<IDatabaseInitializer>().InitializeAsync();
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
