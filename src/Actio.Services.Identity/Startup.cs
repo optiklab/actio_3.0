@@ -31,10 +31,8 @@ namespace Actio.Services.Identity
         {
             services.AddControllers();
 			//services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            // services.AddLogging();
-            var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<string>>();
-            services.AddSingleton(typeof(ILogger), logger);
+
+            services.AddLogging();
 
             services.AddMongoDb(Configuration);
 
@@ -44,13 +42,13 @@ namespace Actio.Services.Identity
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddSingleton<ICommandHandler<CreateUser>, CreateUserHandler>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<IEncrypter, Encrypter>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IEncrypter, Encrypter>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<IUserRepository, UserRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IUserRepository, UserRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<IUserService, UserService>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IUserService, UserService>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Actio.Api
 {
@@ -30,8 +29,8 @@ namespace Actio.Api
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<string>>();
-            services.AddSingleton(typeof(ILogger), logger);
+
+            services.AddLogging();
 
             services.AddJwt(Configuration);
             services.AddMongoDb(Configuration);
@@ -40,10 +39,10 @@ namespace Actio.Api
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddSingleton<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
-            services.AddSingleton<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
-            services.AddSingleton<IEventHandler<UserCreated>, UserCreatedHandler>();
-            services.AddSingleton<IActivityRepository, ActivityRepository>();
+            services.AddTransient<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
+            services.AddTransient<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
+            services.AddTransient<IEventHandler<UserCreated>, UserCreatedHandler>();
+            services.AddTransient<IActivityRepository, ActivityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

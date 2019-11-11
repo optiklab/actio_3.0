@@ -27,13 +27,10 @@ namespace Actio.Services.Activities
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-			
+
 			// services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-			
-            // services.AddLogging();
-            var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<string>>();
-            services.AddSingleton(typeof(ILogger), logger);
+
+            services.AddLogging();
 
             services.AddMongoDb(Configuration);
 
@@ -41,14 +38,14 @@ namespace Actio.Services.Activities
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddSingleton<ICommandHandler<CreateActivity>, CreateActivityHandler>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<ICommandHandler<CreateActivity>, CreateActivityHandler>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<ICategoryRepository, CategoryRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
-            services.AddSingleton<IActivityRepository, ActivityRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<ICategoryRepository, CategoryRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IActivityRepository, ActivityRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<IDatabaseSeeder, CustomMongoSeeder>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IDatabaseSeeder, CustomMongoSeeder>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
 
-            services.AddSingleton<IActivityService, ActivityService>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddTransient<IActivityService, ActivityService>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

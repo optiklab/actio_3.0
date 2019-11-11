@@ -14,9 +14,9 @@ namespace Actio.Services.Activities.Services
     /// </summary>
     public class CustomMongoSeeder : MongoSeeder
     {
-        private ILogger _logger;
+        private ILogger<CustomMongoSeeder> _logger;
         private readonly ICategoryRepository _categoryRepository;
-        public CustomMongoSeeder(IMongoDatabase database, ICategoryRepository categoryRepository, ILogger logger) : base(database)
+        public CustomMongoSeeder(IMongoDatabase database, ICategoryRepository categoryRepository, ILogger<CustomMongoSeeder> logger) : base(database)
         {
             _categoryRepository = categoryRepository;
             _logger = logger;
