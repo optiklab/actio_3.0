@@ -44,6 +44,7 @@ $>dotnet sln add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tes
 
 $>dotnet add tests/Actio.Api.Tests/Actio.Api.Tests.csproj reference src/Actio.Common/Actio.Common.csproj
 $>dotnet add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj reference src/Actio.Common/Actio.Common.csproj
+$>dotnet add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj reference src/Actio.Api/Actio.Api.csproj
 
 $>dotnet add tests/Actio.Api.Tests/Actio.Api.Tests.csproj reference src/Actio.Api/Actio.Api.csproj
 $>dotnet add tests/Actio.Services.Activities.Tests/Actio.Services.Activities.Tests.csproj reference src/Actio.Services.Activities/Actio.Services.Activities.csproj

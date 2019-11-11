@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Actio.Services.Identity\Actio.Services.Identity.csproj" />
     <ProjectReference Include="..\..\src\Actio.Common\Actio.Common.csproj" />
+    <ProjectReference Include="..\..\src\Actio.Api\Actio.Api.csproj" />
   </ItemGroup>
 
 </Project>
