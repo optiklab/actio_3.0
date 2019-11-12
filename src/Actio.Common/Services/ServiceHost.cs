@@ -19,17 +19,20 @@ namespace Actio.Common.Services
         public static HostBuilder Create<TStartup>(string[] args) where TStartup : class
         {
             Console.Title = typeof(TStartup).Namespace;
+
+            // Prepare configuration data for the rest of the system with using IConfigurationBuilder
             var config = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddCommandLine(args) // We will use those arguments during Run our services via console. For example, we can type Url and Port.
-                .Build();
+                .AddEnvironmentVariables() // Load configuration from env variables (it's also used by default)
+                .AddCommandLine(args) // Load configuration from command line arguments. For example, we can type Url and Port.
+                //.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true); // we don't need it as we use default file names.
+                .Build(); // It actually builds final configuration object.
+
+            // TODO: Do we use Kestrel here or not? (since we didn't call .ConfigureWebHostDefaults)
 
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
-                // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-2.2#capture-startup-errors
-                .CaptureStartupErrors(true)
-                // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-2.2#detailed-errors
-                .UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
-                .UseConfiguration(config)
+                // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#host-configuration-values
+                //.UseUrls("http://*:5000") https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#override-configuration
+                .UseConfiguration(config) // This ethod configures everything by reading appsettings.json instead of using AddConsole, AddDebug or AddEventLog
                 .UseStartup<TStartup>();
 
             return new HostBuilder(webHostBuilder.Build());
