@@ -26,9 +26,7 @@ namespace Actio.Api
         {
             services.AddControllers();
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            var serviceProvider = services.BuildServiceProvider();
+            //TODO: services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddLogging();
 
@@ -39,10 +37,10 @@ namespace Actio.Api
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddTransient<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
-            services.AddTransient<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
-            services.AddTransient<IEventHandler<UserCreated>, UserCreatedHandler>();
-            services.AddTransient<IActivityRepository, ActivityRepository>();
+            services.AddScoped<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
+            services.AddScoped<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
+            services.AddScoped<IEventHandler<UserCreated>, UserCreatedHandler>();
+            services.AddScoped<IActivityRepository, ActivityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -42,13 +42,10 @@ namespace Actio.Services.Identity
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
-
-            services.AddTransient<IEncrypter, Encrypter>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
-
-            services.AddTransient<IUserRepository, UserRepository>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
-
-            services.AddTransient<IUserService, UserService>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddScoped<ICommandHandler<CreateUser>, CreateUserHandler>();
+            services.AddSingleton<IEncrypter, Encrypter>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
