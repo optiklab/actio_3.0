@@ -6,6 +6,9 @@ using Actio.Common.RabbitMq;
 
 namespace Actio.Common.Services
 {
+    /// <summary>
+    /// Actually it just wraps both Web Host Builder and subscription logic for Events or Commands to be used by microservices.
+    /// </summary>
     public class BusBuilder : BuilderBase
     {
         private readonly IWebHost _webHost;

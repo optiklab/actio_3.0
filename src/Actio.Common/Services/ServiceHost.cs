@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Actio.Common.Services
 {
+    /// <summary>
+    /// Wrapper for creating a host with using standard .NET Core mechanisms + some custom additions (like UseRabbitMq).
+    /// </summary>
     public class ServiceHost : IServiceHost
     {
         private readonly IWebHost _webHost;
@@ -26,8 +29,6 @@ namespace Actio.Common.Services
                 .AddCommandLine(args) // Load configuration from command line arguments. For example, we can type Url and Port.
                 //.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true); // we don't need it as we use default file names.
                 .Build(); // It actually builds final configuration object.
-
-            // TODO: Do we use Kestrel here or not? (since we didn't call .ConfigureWebHostDefaults)
 
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
                 // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.0#host-configuration-values

@@ -25,9 +25,6 @@ namespace Actio.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            //TODO: services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddLogging();
 
             services.AddJwt(Configuration);
@@ -59,7 +56,6 @@ namespace Actio.Api
             }
 
             app.UseHttpsRedirection();
-			// app.UseMvc();
 
             app.UseRouting();
 

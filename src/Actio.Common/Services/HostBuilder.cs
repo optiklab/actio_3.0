@@ -3,6 +3,9 @@ using RawRabbit;
 
 namespace Actio.Common.Services
 {
+    /// <summary>
+    /// Actually it just wraps both Web Host Builder and and Bus Builder logic.
+    /// </summary>
     public class HostBuilder : BuilderBase
     {
         private readonly IWebHost _webHost;
