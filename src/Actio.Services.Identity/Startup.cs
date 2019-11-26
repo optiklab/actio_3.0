@@ -42,10 +42,10 @@ namespace Actio.Services.Identity
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddScoped<ICommandHandler<CreateUser>, CreateUserHandler>();
+            services.AddSingleton<ICommandHandler<CreateUser>, CreateUserHandler>();
             services.AddSingleton<IEncrypter, Encrypter>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

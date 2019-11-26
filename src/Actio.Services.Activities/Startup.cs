@@ -38,11 +38,11 @@ namespace Actio.Services.Activities
             services.AddRabbitMq(Configuration);
 
             // Link handlers interfaces with handlers.
-            services.AddScoped<ICommandHandler<CreateActivity>, CreateActivityHandler>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IActivityRepository, ActivityRepository>();
-            services.AddScoped<IDatabaseSeeder, CustomMongoSeeder>();
-            services.AddScoped<IActivityService, ActivityService>();
+            services.AddSingleton<ICommandHandler<CreateActivity>, CreateActivityHandler>();
+            services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<IActivityRepository, ActivityRepository>();
+            services.AddSingleton<IDatabaseSeeder, CustomMongoSeeder>();
+            services.AddSingleton<IActivityService, ActivityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

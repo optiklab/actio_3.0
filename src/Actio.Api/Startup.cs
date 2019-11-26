@@ -28,16 +28,14 @@ namespace Actio.Api
             services.AddLogging();
 
             services.AddJwt(Configuration);
+            services.AddRabbitMq(Configuration);
             services.AddMongoDb(Configuration);
 
-            // Our custom configuration of RMQ.
-            services.AddRabbitMq(Configuration);
-
             // Link handlers interfaces with handlers.
-            services.AddScoped<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
-            services.AddScoped<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
-            services.AddScoped<IEventHandler<UserCreated>, UserCreatedHandler>();
-            services.AddScoped<IActivityRepository, ActivityRepository>();
+            services.AddSingleton<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
+            services.AddSingleton<IEventHandler<UserAuthenticated>, UserAuthenticatedHandler>();
+            services.AddSingleton<IEventHandler<UserCreated>, UserCreatedHandler>();
+            services.AddSingleton<IActivityRepository, ActivityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

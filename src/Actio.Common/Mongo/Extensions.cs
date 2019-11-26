@@ -17,7 +17,7 @@ namespace Actio.Common.Mongo
                 return new MongoClient(options.Value.ConnectionString);
             });
 
-            services.AddScoped<IMongoDatabase>(c => // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddSingleton<IMongoDatabase>(c => // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
             {
                 var options = c.GetService<IOptions<MongoOptions>>();
                 var client = c.GetService<MongoClient>();
@@ -25,8 +25,8 @@ namespace Actio.Common.Mongo
                 return client.GetDatabase(options.Value.Database);
             });
 
-            services.AddScoped<IDatabaseInitializer, MongoInitializer>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
-            services.AddScoped<IDatabaseSeeder, MongoSeeder>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddSingleton<IDatabaseInitializer, MongoInitializer>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
+            services.AddSingleton<IDatabaseSeeder, MongoSeeder>(); // Changed from Scoped to Singleton. Looks like .NET Core 2.2 changes.
         }
     }
 }
