@@ -13,9 +13,9 @@ namespace Actio.Services.Identity.Handlers
     {
         private readonly IBusClient _busClient;
         private readonly IUserService _userService;
-        private ILogger _logger;
+        private ILogger<CreateUserHandler> _logger;
 
-        public CreateUserHandler(IBusClient busClient, IUserService userService, ILogger logger)
+        public CreateUserHandler(IBusClient busClient, IUserService userService, ILogger<CreateUserHandler> logger)
         {
             _busClient = busClient;
             _userService = userService;
