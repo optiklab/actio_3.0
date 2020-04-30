@@ -1,3 +1,5 @@
+!This document is better to read with Markdown reader.
+
 Dotnet commands used to create project
 --------------------------------------
 dotnet new sln
@@ -18,6 +20,33 @@ dotnet sln add src/Actio.Services.Identity/Actio.Services.Identity.csproj
 dotnet sln add src/Actio.Services.Activities/Actio.Services.Activities.csproj
 dotnet restore
 dotnet build
+
+
+Dotnet commands used for TEST projects
+--------------------------------------
+
+$>dotnet sln add tests/Actio.Api.Tests/Actio.Api.Tests.csproj
+$>dotnet sln add tests/Actio.Services.Activities.Tests/Actio.Services.Activities.Tests.csproj
+$>dotnet sln add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj
+
+$>dotnet add tests/Actio.Api.Tests/Actio.Api.Tests.csproj reference src/Actio.Common/Actio.Common.csproj
+$>dotnet add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj reference src/Actio.Common/Actio.Common.csproj
+$>dotnet add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj reference src/Actio.Api/Actio.Api.csproj
+
+$>dotnet add tests/Actio.Api.Tests/Actio.Api.Tests.csproj reference src/Actio.Api/Actio.Api.csproj
+$>dotnet add tests/Actio.Services.Activities.Tests/Actio.Services.Activities.Tests.csproj reference src/Actio.Services.Activities/Actio.Services.Activities.csproj
+$>dotnet add tests/Actio.Services.Identity.Tests/Actio.Services.Identity.Tests.csproj reference src/Actio.Services.Identity/Actio.Services.Identity.csproj
+
+$>dotnet add package Microsoft.AspNetCore.Mvc -v 2.2.0
+$>dotnet add package Microsoft.AspNetCore.TestHost -v 2.2.0
+$>dotnet add package Microsoft.AspNetCore.Mvc.Teting -v 2.2.0
+$>dotnet add package Microsoft.AspNetCore.HttpsPolicy -v 2.2.0
+$>dotnet add package Moq
+$>dotnet add package FluentAssertions
+
+
+MORE
+----
 
 (https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.0#endpoint-configuration)
 You can specify URLs using the:
